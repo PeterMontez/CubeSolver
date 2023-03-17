@@ -1,0 +1,15 @@
+C:\Users\disrct\Desktop\CubeSolver\bin\Debug\net7.0\CubeSolver.exe
+C:\Users\disrct\Desktop\CubeSolver\bin\Debug\net7.0\CubeSolver.deps.json
+C:\Users\disrct\Desktop\CubeSolver\bin\Debug\net7.0\CubeSolver.runtimeconfig.json
+C:\Users\disrct\Desktop\CubeSolver\bin\Debug\net7.0\CubeSolver.dll
+C:\Users\disrct\Desktop\CubeSolver\bin\Debug\net7.0\CubeSolver.pdb
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.csproj.AssemblyReference.cache
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.AssemblyInfoInputs.cache
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.AssemblyInfo.cs
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.csproj.CoreCompileInputs.cache
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.dll
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\refint\CubeSolver.dll
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.pdb
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\CubeSolver.genruntimeconfig.cache
+C:\Users\disrct\Desktop\CubeSolver\obj\Debug\net7.0\ref\CubeSolver.dll
