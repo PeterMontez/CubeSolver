@@ -1,0 +1,15 @@
+C:\Users\Aluno\Desktop\CubeSolver\bin\Debug\net6.0\CubeSolver.exe
+C:\Users\Aluno\Desktop\CubeSolver\bin\Debug\net6.0\CubeSolver.deps.json
+C:\Users\Aluno\Desktop\CubeSolver\bin\Debug\net6.0\CubeSolver.runtimeconfig.json
+C:\Users\Aluno\Desktop\CubeSolver\bin\Debug\net6.0\CubeSolver.dll
+C:\Users\Aluno\Desktop\CubeSolver\bin\Debug\net6.0\CubeSolver.pdb
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.csproj.AssemblyReference.cache
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.AssemblyInfoInputs.cache
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.AssemblyInfo.cs
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.csproj.CoreCompileInputs.cache
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.dll
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\refint\CubeSolver.dll
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.pdb
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\CubeSolver.genruntimeconfig.cache
+C:\Users\Aluno\Desktop\CubeSolver\obj\Debug\net6.0\ref\CubeSolver.dll

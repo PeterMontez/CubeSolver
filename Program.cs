@@ -31,5 +31,15 @@ for (int i = 0; i < 6; i++)
 
     Face facezinha = new Face(cores);
     cubinho.addFace(facezinha, i);
+
+    Console.Write("\n");
+    foreach (var item in cores)
+    {
+        Console.Write(item);
+    }
+    Console.Write("\n");
 }
+
+cubinho.rotate(0,true);
+cubinho.showFace(0);
 
