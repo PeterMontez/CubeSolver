@@ -24,6 +24,11 @@ public class Cubo
 {
     public Face[] cubo { get; set; } = new Face[6];
     public int[][] relations { get; set; } = new int[6][];
+    public int[] side0 { get; set; } = new int[] {0, 1, 2};
+    public int[] side1 { get; set; } = new int[] {2, 5, 8};
+    public int[] side2 { get; set; } = new int[] {6, 7, 8};
+    public int[] side3 { get; set; } = new int[] {0, 3, 6};
+    
 
     public Cubo()
     {
@@ -48,13 +53,30 @@ public class Cubo
             int[] tempFace = new int[3];
             switch (face)
             {
-                case 2: case 4: case 5:
-                    cubo[relations[face][0]].values[];
+                case 0:
+                    for (int i = 0; i < 3; i++)
+                    {                        
+                        tempFace[i] = cubo[relations[face][0]].values[side2[i]];
+                        cubo[relations[face][0]].values[side2[i]] = cubo[relations[face][3]].values[side2[Math.Abs(i-2)]];
+                        cubo[relations[face][3]].values[side2[Math.Abs(i-2)]] = cubo[relations[face][2]].values[side0[Math.Abs(i-2)]];
+                        cubo[relations[face][2]].values[side0[Math.Abs(i-2)]] = cubo[relations[face][1]].values[side3[Math.Abs(i)]];
+                        cubo[relations[face][1]].values[side3[Math.Abs(i)]] = (byte)tempFace[i];
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < 3; i++)
+                    {                        
+                        tempFace[i] = cubo[relations[face][0]].values[side1[i]];
+                        cubo[relations[face][0]].values[side1[i]] = cubo[relations[face][3]].values[side2[Math.Abs(i-2)]];
+                        cubo[relations[face][3]].values[side2[Math.Abs(i-2)]] = cubo[relations[face][2]].values[side0[Math.Abs(i-2)]];
+                        cubo[relations[face][2]].values[side0[Math.Abs(i-2)]] = cubo[relations[face][1]].values[side3[Math.Abs(i)]];
+                        cubo[relations[face][1]].values[side3[Math.Abs(i)]] = (byte)tempFace[i];
+                    }
+                    break;
 
                 default:
                     break;
             }
-            cubo[relations[face][0]].values[];
         }
     }
 
