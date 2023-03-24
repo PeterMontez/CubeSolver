@@ -51,54 +51,112 @@ public class Cubo
         {
             cubo[face].cW();
             int[] tempFace = new int[3];
-            switch (face)
+            int rotAmount = dir == true ? 1 : 3;
+            for (int j = 0; j < rotAmount; j++)
             {
-                case 0:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        tempFace[i] = cubo[relations[face][0]].values[side2[i]];
-                        cubo[relations[face][0]].values[side2[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i-2)]];
-                        cubo[relations[face][3]].values[side1[Math.Abs(i-2)]] = cubo[relations[face][2]].values[side0[Math.Abs(i-2)]];
-                        cubo[relations[face][2]].values[side0[Math.Abs(i-2)]] = cubo[relations[face][1]].values[side3[i]];
-                        cubo[relations[face][1]].values[side3[i]] = (byte)tempFace[i];
-                    }
-                    break;
-                case 1:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        tempFace[i] = cubo[relations[face][0]].values[side1[i]];
-                        cubo[relations[face][0]].values[side1[i]] = cubo[relations[face][3]].values[side1[i]];
-                        cubo[relations[face][3]].values[side2[i]] = cubo[relations[face][2]].values[side1[i]];
-                        cubo[relations[face][2]].values[side1[i]] = cubo[relations[face][1]].values[side3[Math.Abs(i-2)]];
-                        cubo[relations[face][1]].values[side3[Math.Abs(i-2)]] = (byte)tempFace[i];
-                    }
-                    break;
-                case 2:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        tempFace[i] = cubo[relations[face][0]].values[side0[i]];
-                        cubo[relations[face][0]].values[side0[i]] = cubo[relations[face][3]].values[side1[i]];
-                        cubo[relations[face][3]].values[side1[i]] = cubo[relations[face][2]].values[side2[Math.Abs(i-2)]];
-                        cubo[relations[face][2]].values[side2[Math.Abs(i-2)]] = cubo[relations[face][1]].values[side3[Math.Abs(i-2)]];
-                        cubo[relations[face][1]].values[side3[Math.Abs(i-2)]] = (byte)tempFace[i];
-                    }
-                    break;
-                case 3: //TODO - TA TOTALMENTE ERRADO, SÓ COPIADO E COLADO AQUI
-                    for (int i = 0; i < 3; i++)
-                    {
-                        tempFace[i] = cubo[relations[face][0]].values[side0[i]];
-                        cubo[relations[face][0]].values[side0[i]] = cubo[relations[face][3]].values[side1[i]];
-                        cubo[relations[face][3]].values[side2[i]] = cubo[relations[face][2]].values[side1[i]];
-                        cubo[relations[face][2]].values[side1[i]] = cubo[relations[face][1]].values[side3[Math.Abs(i-2)]];
-                        cubo[relations[face][1]].values[side3[Math.Abs(i-2)]] = (byte)tempFace[i];
-                    }
-                    break;
-                case 4: //TODO
-                    break;
+                switch (face)
+                {
+                    case 0:
+                        for (int i = 0; i < 3; i++)
+                        {
+                            tempFace[i] = cubo[relations[face][0]].values[side2[i]];
+                            cubo[relations[face][0]].values[side2[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i-2)]];
+                            cubo[relations[face][3]].values[side1[Math.Abs(i-2)]] = cubo[relations[face][2]].values[side0[Math.Abs(i-2)]];
+                            cubo[relations[face][2]].values[side0[Math.Abs(i-2)]] = cubo[relations[face][1]].values[side3[i]];
+                            cubo[relations[face][1]].values[side3[i]] = (byte)tempFace[i];
+                        }
+                        break;
+                    case 1:
+                        for (int i = 0; i < 3; i++)
+                        {
+                            tempFace[i] = cubo[relations[face][0]].values[side1[i]];
+                            cubo[relations[face][0]].values[side1[i]] = cubo[relations[face][3]].values[side1[i]];
+                            cubo[relations[face][3]].values[side2[i]] = cubo[relations[face][2]].values[side1[i]];
+                            cubo[relations[face][2]].values[side1[i]] = cubo[relations[face][1]].values[side3[Math.Abs(i-2)]];
+                            cubo[relations[face][1]].values[side3[Math.Abs(i-2)]] = (byte)tempFace[i];
+                        }
+                        break;
+                    case 2:
+                        for (int i = 0; i < 3; i++)
+                        {
+                            tempFace[i] = cubo[relations[face][0]].values[side0[i]];
+                            cubo[relations[face][0]].values[side0[i]] = cubo[relations[face][3]].values[side1[i]];
+                            cubo[relations[face][3]].values[side1[i]] = cubo[relations[face][2]].values[side2[Math.Abs(i-2)]];
+                            cubo[relations[face][2]].values[side2[Math.Abs(i-2)]] = cubo[relations[face][1]].values[side3[Math.Abs(i-2)]];
+                            cubo[relations[face][1]].values[side3[Math.Abs(i-2)]] = (byte)tempFace[i];
+                        }
+                        break;
+                    case 3:
+                        for (int i = 0; i < 3; i++)
+                        {
+                            tempFace[i] = cubo[relations[face][0]].values[side3[i]];
+                            cubo[relations[face][0]].values[side3[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i-2)]];
+                            cubo[relations[face][3]].values[side1[Math.Abs(i-2)]] = cubo[relations[face][2]].values[side3[i]];
+                            cubo[relations[face][2]].values[side3[i]] = cubo[relations[face][1]].values[side3[i]];
+                            cubo[relations[face][1]].values[side3[i]] = (byte)tempFace[i];
+                        }
+                        break;
+                    case 4: 
+                        for (int i = 0; i < 3; i++)
+                        {
+                            tempFace[i] = cubo[relations[face][0]].values[side0[i]];
+                            cubo[relations[face][0]].values[side0[i]] = cubo[relations[face][3]].values[side0[i]];
+                            cubo[relations[face][3]].values[side0[i]] = cubo[relations[face][2]].values[side0[i]];
+                            cubo[relations[face][2]].values[side0[i]] = cubo[relations[face][1]].values[side0[i]];
+                            cubo[relations[face][1]].values[side0[i]] = (byte)tempFace[i];
+                        }
+                        break;
+                    case 5: 
+                        for (int i = 0; i < 3; i++)
+                        {
+                            tempFace[i] = cubo[relations[face][0]].values[side3[i]];
+                            cubo[relations[face][0]].values[side3[i]] = cubo[relations[face][3]].values[side3[i]];
+                            cubo[relations[face][3]].values[side3[i]] = cubo[relations[face][2]].values[side3[i]];
+                            cubo[relations[face][2]].values[side3[i]] = cubo[relations[face][1]].values[side3[i]];
+                            cubo[relations[face][1]].values[side3[i]] = (byte)tempFace[i];
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
-
-                default:
-                    break;
+    public void translateAlg(string alg)
+    {
+        string[] moves = alg.Split(' ');
+        foreach (var move in moves)
+        {
+            bool dir = move.Contains("'") ? false : true;
+            int doubleMove = move.Contains("2") ? 2 : 1;
+            string newMove = move.Replace("'", string.Empty).Replace("2", string.Empty);
+            Console.WriteLine(newMove);
+            for (int i = 0; i < doubleMove; i++)
+            {
+                switch (newMove)
+                {
+                    case "F":
+                        rotate(0, dir);
+                        break;
+                    case "R":
+                        rotate(1, dir);
+                        break;
+                    case "B":
+                        rotate(2, dir);
+                        break;
+                    case "L":
+                        rotate(3, dir);
+                        break;
+                    case "Y":
+                        rotate(4, dir);
+                        break;
+                    case "D":
+                        rotate(5, dir);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -109,18 +167,28 @@ public class Cubo
         {
             if (cubo[face].values[i] == 87)
                 Console.BackgroundColor = ConsoleColor.White;
-            else if (cubo[face].values[i] == 89)
+            if (cubo[face].values[i] == 89)
                 Console.BackgroundColor = ConsoleColor.Yellow;
             if (cubo[face].values[i] == 66)
                 Console.BackgroundColor = ConsoleColor.Blue;
             if (cubo[face].values[i] == 79)
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.BackgroundColor = ConsoleColor.Blue;
-            Console.Write()
+                Console.BackgroundColor = ConsoleColor.Magenta;
+            if (cubo[face].values[i] == 71)
+                Console.BackgroundColor = ConsoleColor.Green;
+            if (cubo[face].values[i] == 82)
+                Console.BackgroundColor = ConsoleColor.Red;
+            Console.Write("|-|");
+            if ((i+1) % 3 == 0)
+            {
+                Console.ResetColor();
+                Console.Write("\n");
+            }
+            else
+                Console.Write(" ");
+            Console.ResetColor();
+            
         }
-        Console.WriteLine($"{cubo[face].values[0]}, {cubo[face].values[1]}, {cubo[face].values[2]}");
-        Console.WriteLine($"{cubo[face].values[3]}, {cubo[face].values[4]}, {cubo[face].values[5]}");
-        Console.WriteLine($"{cubo[face].values[6]}, {cubo[face].values[7]}, {cubo[face].values[8]}");
+        Console.ResetColor();
     }
 
 }

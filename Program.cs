@@ -40,6 +40,6 @@ for (int i = 0; i < 6; i++)
     Console.Write("\n");
 }
 
-cubinho.rotate(0,true);
+//cubinho.rotate(0,true);
+cubinho.translateAlg("R U R' U' R' F R2 U' R' U' R U R' F'");
 cubinho.showFace(1);
-
