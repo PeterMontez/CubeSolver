@@ -105,6 +105,19 @@ public class Cubo
 
     public void showFace(int face)
     {
+        for (int i = 0; i < 9; i++)
+        {
+            if (cubo[face].values[i] == 87)
+                Console.BackgroundColor = ConsoleColor.White;
+            else if (cubo[face].values[i] == 89)
+                Console.BackgroundColor = ConsoleColor.Yellow;
+            if (cubo[face].values[i] == 66)
+                Console.BackgroundColor = ConsoleColor.Blue;
+            if (cubo[face].values[i] == 79)
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.Write()
+        }
         Console.WriteLine($"{cubo[face].values[0]}, {cubo[face].values[1]}, {cubo[face].values[2]}");
         Console.WriteLine($"{cubo[face].values[3]}, {cubo[face].values[4]}, {cubo[face].values[5]}");
         Console.WriteLine($"{cubo[face].values[6]}, {cubo[face].values[7]}, {cubo[face].values[8]}");

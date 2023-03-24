@@ -41,5 +41,5 @@ for (int i = 0; i < 6; i++)
 }
 
 cubinho.rotate(0,true);
-cubinho.showFace(0);
+cubinho.showFace(1);
 
