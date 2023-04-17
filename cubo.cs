@@ -20,11 +20,6 @@ public class Face
     }
 }
 
-public class Peca
-{
-    
-}
-
 public class Cubo
 {
     public Face[] cubo { get; set; } = new Face[6];
