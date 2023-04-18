@@ -400,19 +400,19 @@ public class Solver
                                     cubinho.rotate(4, true);
                                     cubinho.rotate(4, true);
                                     edgesAlg += " U2";
-                                    k = topEdges[(k + 2 == 4 ? 0 : (k + 2 == 5 ? 1 : k + 2))];
+                                    k = topEdges[(i + 2 == 4 ? 0 : (i + 2 == 5 ? 1 : i + 2))];
                                     break;
                                 case 1:
                                 case -3:
                                     cubinho.rotate(4, false);
                                     edgesAlg += " U'";
-                                    k = topEdges[k - 1 == -1 ? 3 : k - 1];
+                                    k = topEdges[i - 1 == -1 ? 3 : i - 1];
                                     break;
                                 case -1:
                                 case 3:
                                     cubinho.rotate(4, true);
                                     edgesAlg += " U";
-                                    k = topEdges[k + 1 == 4 ? 0 : k + 1];
+                                    k = topEdges[i + 1 == 4 ? 0 : i + 1];
                                     break;
                                 case 0:
                                     break;
@@ -422,29 +422,29 @@ public class Solver
 
                             }
 
-                            if (cubinho.cubo[4].values[k] == cubinho.cubo[i + 1 == 4 ? 0 : i + 1].values[4])
+                            if (cubinho.cubo[4].values[k] == cubinho.cubo[j + 1 == 4 ? 0 : j + 1].values[4])
                             {
                                 cubinho.rotate(4, true);
-                                cubinho.rotate(i + 1 == 4 ? 0 : i + 1, true);
+                                cubinho.rotate(j + 1 == 4 ? 0 : j + 1, true);
                                 cubinho.rotate(4, true);
-                                cubinho.rotate(i + 1 == 4 ? 0 : i + 1, false);
+                                cubinho.rotate(j + 1 == 4 ? 0 : j + 1, false);
                                 cubinho.rotate(4, false);
-                                cubinho.rotate(i, false);
+                                cubinho.rotate(j, false);
                                 cubinho.rotate(4, false);
-                                cubinho.rotate(i, true);
-                                edgesAlg += " U " + faceNome[i + 1 == 4 ? 0 : i + 1] + " U " + faceNome[i + 1 == 4 ? 0 : i + 1] + "' U' " + faceNome[i] + "' U' " + faceNome[i];
+                                cubinho.rotate(j, true);
+                                edgesAlg += " U " + faceNome[j + 1 == 4 ? 0 : j + 1] + " U " + faceNome[j + 1 == 4 ? 0 : j + 1] + "' U' " + faceNome[j] + "' U' " + faceNome[j];
                             }
                             else
                             {
                                 cubinho.rotate(4, false);
-                                cubinho.rotate(i - 1 == -1 ? 3 : i - 1, false);
+                                cubinho.rotate(j - 1 == -1 ? 3 : j - 1, false);
                                 cubinho.rotate(4, false);
-                                cubinho.rotate(i - 1 == -1 ? 3 : i - 1, true);
+                                cubinho.rotate(j - 1 == -1 ? 3 : j - 1, true);
                                 cubinho.rotate(4, true);
-                                cubinho.rotate(i, true);
+                                cubinho.rotate(j, true);
                                 cubinho.rotate(4, true);
-                                cubinho.rotate(i, false);
-                                edgesAlg += " U' " + faceNome[i - 1 == -1 ? 3 : i - 1] + "' U' " + faceNome[i + 1 == 4 ? 0 : i + 1] + " U " + faceNome[i] + " U " + faceNome[i] + "'";
+                                cubinho.rotate(j, false);
+                                edgesAlg += " U' " + faceNome[j - 1 == -1 ? 3 : j - 1] + "' U' " + faceNome[j - 1 == -1 ? 3 : j - 1] + " U " + faceNome[j] + " U " + faceNome[j] + "'";
                             }
 
                         }
@@ -470,8 +470,192 @@ public class Solver
                     edgesAlg += " " + faceNome[i - 1 == -1 ? 3 : i - 1] + "' U' " + faceNome[i - 1 == -1 ? 3 : i - 1] + " U " + faceNome[i] + " U " + faceNome[i] + "'";
                 }
             }
-        Console.WriteLine(edgesAlg);
         }
+        Console.WriteLine(edgesAlg);
+    }
+
+    public void TopCross()
+    {   
+        string topCrossAlg = string.Empty;
+        byte corTopo = cubinho.cubo[4].values[4];
+        int[] crossPieces = new int[] {1, 3, 7, 5};
+        bool topCrossCheck()
+        {
+            for (int i = 1; i < 8; i = i + 2)
+            {
+                if (cubinho.cubo[4].values[i] != cubinho.cubo[4].values[4])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        while (!topCrossCheck())
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[4].values[crossPieces[i]] == cubinho.cubo[4].values[crossPieces[i + 2 == 4 ? 0 : (i + 2 == 5 ? 1 : i + 2)]] && cubinho.cubo[4].values[crossPieces[i]] == corTopo)
+                {
+                    cubinho.rotate(i - 1 == -1 ? 3 : i - 1, true);
+                    cubinho.rotate(i, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(i, false);
+                    cubinho.rotate(4, false);
+                    cubinho.rotate(i - 1 == -1 ? 3 : i - 1, false);
+                    topCrossAlg += " " + faceNome[i - 1 == -1 ? 3 : i - 1] + " " + faceNome[i] + " U " + faceNome[i] + "' U' " + faceNome[i - 1 == -1 ? 3 : i - 1] + "'";
+                    break;
+                }
+                if (cubinho.cubo[4].values[crossPieces[i]] == cubinho.cubo[4].values[crossPieces[i + 1 == 4 ? 0 : i + 1]] && cubinho.cubo[4].values[crossPieces[i]] == corTopo)
+                {
+                    cubinho.rotate(i, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(i + 1 == 4 ? 0 : i + 1, true);
+                    cubinho.rotate(4, false);
+                    cubinho.rotate(i + 1 == 4 ? 0 : i + 1, false);
+                    cubinho.rotate(i, false);
+                    topCrossAlg += " " + faceNome[i] + " U " + faceNome[i + 1 == 4 ? 0 : i + 1] + " U' " + faceNome[i + 1 == 4 ? 0 : i + 1] + "' " + faceNome[i] + "'";
+                    break;
+                }
+                else if (i == 3)
+                {
+                    cubinho.rotate(i, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(i + 1 == 4 ? 0 : i + 1, true);
+                    cubinho.rotate(4, false);
+                    cubinho.rotate(i + 1 == 4 ? 0 : i + 1, false);
+                    cubinho.rotate(i, false);
+                    topCrossAlg += " " + faceNome[i] + " U " + faceNome[i + 1 == 4 ? 0 : i + 1] + " U' " + faceNome[i + 1 == 4 ? 0 : i + 1] + "' " + faceNome[i] + "'";
+                    break;
+                }
+
+            }
+        }
+        Console.WriteLine(topCrossAlg);
+    }
+
+    public void TopCorners()
+    {
+        string TopCornersAlg = string.Empty;
+        byte corTopo = cubinho.cubo[4].values[4];
+        int[] edgesIndex = new int[] {6, 8, 2, 0};
+        bool checkTopCorners()
+        {
+            for (int i = 0; i < 9; i = i + 2)
+            {
+                if (cubinho.cubo[4].values[i] != corTopo)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        while (!checkTopCorners())
+        {
+            int topCount = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if(cubinho.cubo[4].values[edgesIndex[i]] == corTopo)
+                {
+                    topCount++;
+                }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[4].values[edgesIndex[i]] == corTopo)
+                {
+                    switch (topCount)
+                    {
+                        case 1:
+                            for (int j = 0; j < i; j++)
+                            {
+                                cubinho.rotate(4, true);
+                                TopCornersAlg += " U";
+                            }
+                            cubinho.translateAlg("R U R' U R U2 R'");
+                            TopCornersAlg += " R U R' U R U2 R'";
+                            break;
+
+                        case 2:
+                            if (cubinho.cubo[4].values[edgesIndex[i + 1 == 4 ? 0 : i + 1]] == corTopo)
+                            {
+                                int uTurns = 0;
+                                if (cubinho.cubo[i + 2 == 5 ? 1 : (i + 2 == 4 ? 0 : i + 2)].values[0] == corTopo)
+                                {
+                                    switch (i)
+                                    {
+                                        case 0:
+                                            uTurns = 2;
+                                            break;
+                                        case 1:
+                                            uTurns = 3;
+                                            break;
+                                        case 3:
+                                            uTurns = 1;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    switch (i)
+                                    {
+                                        case 0:
+                                            uTurns = 3;
+                                            break;
+                                        case 2:
+                                            uTurns = 1;
+                                            break;
+                                        case 3:
+                                            uTurns = 2;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                                for (int j = 0; j < uTurns; j++)
+                                    {
+                                        cubinho.rotate(4, true);
+                                        TopCornersAlg += " U";
+                                    }
+                                    cubinho.translateAlg("R U R' U R U2 R'");
+                                    TopCornersAlg += " R U R' U R U2 R'";
+                            }
+                            else
+                            {
+                                if (cubinho.cubo[i].values[2] == corTopo)
+                                {
+                                    TopCornersAlg += " U'";
+                                    cubinho.rotate(4, false);
+                                }
+                                else
+                                {
+                                    TopCornersAlg += " U";
+                                    cubinho.rotate(4, true);
+                                }
+                                cubinho.translateAlg("R U R' U R U2 R'");
+                                TopCornersAlg += " R U R' U R U2 R'";
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("DEU OU 3 QUINAS DE TOP OU ENTROU NO IF COM 0");
+                            break;
+                    }
+                    break;
+                }
+
+                if (topCount == 0)
+                {
+                    
+                }
+
+            }
+
+        }
+
     }
 
 }
