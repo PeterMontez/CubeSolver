@@ -173,14 +173,14 @@ public class Solver
         }
         Console.WriteLine(crossAlg);
 
-    } 
+    }
 
     public void FirstCorners()
     {
         string firstCornersAlg = string.Empty;
         byte corBase = cubinho.cubo[5].values[4];
-        int[] rightWhite = new int[] {6, 8, 2, 0};
-        int[] leftWhite = new int[] {8, 2, 0, 6};
+        int[] rightWhite = new int[] { 6, 8, 2, 0 };
+        int[] leftWhite = new int[] { 8, 2, 0, 6 };
         bool cornersCheck()
         {
             for (int i = 0; i < 4; i++)
@@ -359,15 +359,119 @@ public class Solver
 
             for (int i = 0; i < 4; i++)
             {
-                
+
             }
         }
-            Console.WriteLine(firstCornersAlg);
+        Console.WriteLine(firstCornersAlg);
     }
 
     public void CenterEdges()
     {
-        
+        string edgesAlg = string.Empty;
+        bool edgesCheck()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[i].values[3] != cubinho.cubo[i].values[4] || cubinho.cubo[i].values[5] != cubinho.cubo[i].values[4])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        byte corTopo = cubinho.cubo[4].values[4];
+
+        void edgeOnTop()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                int[] topEdges = new int[] {7, 5, 1, 3};
+                int k = topEdges[i];
+                if (cubinho.cubo[i].values[1] != corTopo && cubinho.cubo[4].values[k] != corTopo)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (cubinho.cubo[i].values[1] == cubinho.cubo[j].values[4])
+                        {
+                            switch (j - i)
+                            {
+                                case 2:
+                                case -2:
+                                    cubinho.rotate(4, true);
+                                    cubinho.rotate(4, true);
+                                    edgesAlg += " U2";
+                                    k = topEdges[(k + 2 == 4 ? 0 : (k + 2 == 5 ? 1 : k + 2))];
+                                    break;
+                                case 1:
+                                case -3:
+                                    cubinho.rotate(4, false);
+                                    edgesAlg += " U'";
+                                    k = topEdges[k - 1 == -1 ? 3 : k - 1];
+                                    break;
+                                case -1:
+                                case 3:
+                                    cubinho.rotate(4, true);
+                                    edgesAlg += " U";
+                                    k = topEdges[k + 1 == 4 ? 0 : k + 1];
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    Console.WriteLine("DEU UM ERRO AQUI, FORMAÇÃO DA CRUZ, PEÇA ORIENTADA CERTA NO LUGAR ERRADO");
+                                    break;
+
+                            }
+
+                            if (cubinho.cubo[4].values[k] == cubinho.cubo[i + 1 == 4 ? 0 : i + 1].values[4])
+                            {
+                                cubinho.rotate(4, true);
+                                cubinho.rotate(i + 1 == 4 ? 0 : i + 1, true);
+                                cubinho.rotate(4, true);
+                                cubinho.rotate(i + 1 == 4 ? 0 : i + 1, false);
+                                cubinho.rotate(4, false);
+                                cubinho.rotate(i, false);
+                                cubinho.rotate(4, false);
+                                cubinho.rotate(i, true);
+                                edgesAlg += " U " + faceNome[i + 1 == 4 ? 0 : i + 1] + " U " + faceNome[i + 1 == 4 ? 0 : i + 1] + "' U' " + faceNome[i] + "' U' " + faceNome[i];
+                            }
+                            else
+                            {
+                                cubinho.rotate(4, false);
+                                cubinho.rotate(i - 1 == -1 ? 3 : i - 1, false);
+                                cubinho.rotate(4, false);
+                                cubinho.rotate(i - 1 == -1 ? 3 : i - 1, true);
+                                cubinho.rotate(4, true);
+                                cubinho.rotate(i, true);
+                                cubinho.rotate(4, true);
+                                cubinho.rotate(i, false);
+                                edgesAlg += " U' " + faceNome[i - 1 == -1 ? 3 : i - 1] + "' U' " + faceNome[i + 1 == 4 ? 0 : i + 1] + " U " + faceNome[i] + " U " + faceNome[i] + "'";
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+        while (!edgesCheck())
+        {
+            edgeOnTop();
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[i].values[3] != cubinho.cubo[i].values[4] && cubinho.cubo[i].values[3] != corTopo && cubinho.cubo[i - 1 == -1 ? 3 : i - 1].values[5] != cubinho.cubo[i - 1 == -1 ? 3 : i - 1].values[4] && cubinho.cubo[i - 1 == -1 ? 3 : i - 1].values[5] != corTopo)
+                {
+                    cubinho.rotate(i - 1 == -1 ? 3 : i - 1, false);
+                    cubinho.rotate(4, false);
+                    cubinho.rotate(i - 1 == -1 ? 3 : i - 1, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(i, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(i, false);
+                    edgesAlg += " " + faceNome[i - 1 == -1 ? 3 : i - 1] + "' U' " + faceNome[i - 1 == -1 ? 3 : i - 1] + " U " + faceNome[i] + " U " + faceNome[i] + "'";
+                }
+            }
+        Console.WriteLine(edgesAlg);
+        }
     }
 
 }
