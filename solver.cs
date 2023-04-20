@@ -385,7 +385,7 @@ public class Solver
         {
             for (int i = 0; i < 4; i++)
             {
-                int[] topEdges = new int[] {7, 5, 1, 3};
+                int[] topEdges = new int[] { 7, 5, 1, 3 };
                 int k = topEdges[i];
                 if (cubinho.cubo[i].values[1] != corTopo && cubinho.cubo[4].values[k] != corTopo)
                 {
@@ -475,10 +475,10 @@ public class Solver
     }
 
     public void TopCross()
-    {   
+    {
         string topCrossAlg = string.Empty;
         byte corTopo = cubinho.cubo[4].values[4];
-        int[] crossPieces = new int[] {1, 3, 7, 5};
+        int[] crossPieces = new int[] { 1, 3, 7, 5 };
         bool topCrossCheck()
         {
             for (int i = 1; i < 8; i = i + 2)
@@ -538,7 +538,7 @@ public class Solver
     {
         string TopCornersAlg = string.Empty;
         byte corTopo = cubinho.cubo[4].values[4];
-        int[] edgesIndex = new int[] {6, 8, 2, 0};
+        int[] edgesIndex = new int[] { 6, 8, 2, 0 };
         bool checkTopCorners()
         {
             for (int i = 0; i < 9; i = i + 2)
@@ -556,7 +556,7 @@ public class Solver
             int topCount = 0;
             for (int i = 0; i < 4; i++)
             {
-                if(cubinho.cubo[4].values[edgesIndex[i]] == corTopo)
+                if (cubinho.cubo[4].values[edgesIndex[i]] == corTopo)
                 {
                     topCount++;
                 }
@@ -617,12 +617,12 @@ public class Solver
                                     }
                                 }
                                 for (int j = 0; j < uTurns; j++)
-                                    {
-                                        cubinho.rotate(4, true);
-                                        TopCornersAlg += " U";
-                                    }
-                                    cubinho.translateAlg("R U R' U R U2 R'");
-                                    TopCornersAlg += " R U R' U R U2 R'";
+                                {
+                                    cubinho.rotate(4, true);
+                                    TopCornersAlg += " U";
+                                }
+                                cubinho.translateAlg("R U R' U R U2 R'");
+                                TopCornersAlg += " R U R' U R U2 R'";
                             }
                             else
                             {
@@ -649,13 +649,64 @@ public class Solver
 
                 if (topCount == 0)
                 {
-                    
+                    cubinho.translateAlg("R U R' U R U2 R'");
+                    TopCornersAlg += " R U R' U R U2 R'";
                 }
 
             }
 
         }
 
+        Console.WriteLine(TopCornersAlg);
+
+    }
+
+    public void PLL1()
+    {
+        string PLL1Alg = string.Empty;
+        bool isMinerva()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[i].values[0] != cubinho.cubo[i].values[2])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        while (!isMinerva())
+        {
+            int uTurns = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[i].values[0] == cubinho.cubo[i].values[2])
+                {
+                    switch (i)
+                    {
+                        case 0: uTurns = 2; break;
+                        case 1: uTurns = 3; break;
+                        case 3: uTurns = 1; break;
+                        default: break;
+                    }
+                    for (int j = 0; j < uTurns; j++)
+                    {
+                        cubinho.rotate(4, true);
+                        PLL1Alg += " U";
+                    }
+                    cubinho.translateAlg("R' F R' B2 R F' R' B2 R2");
+                    PLL1Alg += " R' F R' B2 R F' R' B2 R2";
+                    break;
+                }
+                else if (i == 3)
+                {
+                    cubinho.translateAlg("R' F R' B2 R F' R' B2 R2");
+                    PLL1Alg += " R' F R' B2 R F' R' B2 R2";
+                }
+            }
+        }
+        Console.WriteLine(PLL1Alg);
     }
 
 }
