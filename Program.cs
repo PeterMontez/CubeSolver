@@ -40,11 +40,12 @@ byte[] validos = {87, 89, 71, 66, 79, 82};
 //     Console.Write("\n");
 // }
 
-cubinho.translateAlg("F R' F' L F R F' L'");
+cubinho.translateAlg("L2 U B2 F' L2 F2 L' F2 R D L2 R' D2 F2 L2 D2 U F U2 R' D' B' L2 F2 L R U L F L");
 Solver solucao = new Solver(cubinho);
-//solucao.Cross();
-//solucao.FirstCorners();
-//solucao.CenterEdges();
+solucao.Cross();
+solucao.FirstCorners();
+solucao.CenterEdges();
 solucao.TopCross();
 solucao.TopCorners();
 solucao.PLL1();
+solucao.Minerva();

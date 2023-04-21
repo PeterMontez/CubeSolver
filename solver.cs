@@ -709,4 +709,92 @@ public class Solver
         Console.WriteLine(PLL1Alg);
     }
 
+    public void Minerva()
+    {
+        string minervaAlg = string.Empty;
+        bool minervaCheck()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (cubinho.cubo[i].values[0] != cubinho.cubo[i].values[1] || cubinho.cubo[i].values[1] != cubinho.cubo[i].values[2])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        while(!minervaCheck())
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                int uTurns = 0;
+                if (cubinho.cubo[i].values[0] == cubinho.cubo[i].values[1] && cubinho.cubo[i].values[1] == cubinho.cubo[i].values[2])
+                {
+                    switch (i)
+                    {
+                        case 0: uTurns = 2; break;
+                        case 1: uTurns = 3; break;
+                        case 3: uTurns = 1; break;
+                        default: break;
+                    }
+                    for (int j = 0; j < uTurns; j++)
+                    {
+                        cubinho.rotate(4, true);
+                        minervaAlg += " U";
+                    }
+                    cubinho.rotate(0, true);
+                    cubinho.rotate(0, true);
+                    minervaAlg += " F2";
+                    if (cubinho.cubo[1].values[1] == cubinho.cubo[0].values[1])
+                    {
+                        cubinho.translateAlg("U R' L F2 R L' U F2");
+                        minervaAlg += " U R' L F2 R L' U F2";
+                    }
+                    else
+                    {
+                        cubinho.translateAlg("U' R' L F2 R L' U' F2");
+                        minervaAlg += " U' R' L F2 R L' U' F2";
+                    }
+                    break;
+                }
+                if (i == 3)
+                {
+                    cubinho.translateAlg("F2 U R' L F2 R L' U F2");
+                    minervaAlg += " F2 U R' L F2 R L' U F2";
+                }
+            }
+
+            if (minervaCheck())
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (cubinho.cubo[0].values[1] == cubinho.cubo[i].values[4])
+                    {
+                        switch (i)
+                        {
+                            case 1:
+                                cubinho.rotate(4,false);
+                                minervaAlg += " U'";
+                                break;
+                            case 2:
+                                cubinho.rotate(4, true);
+                                cubinho.rotate(4, true);
+                                minervaAlg += " U2";
+                                break;
+                            case 3:
+                                cubinho.rotate(4, true);
+                                minervaAlg += " U";
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
+        }
+        Console.WriteLine(minervaAlg);
+    }
+
 }
