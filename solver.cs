@@ -8,7 +8,7 @@ public class Solver
         cubinho = cubo;
     }
 
-    public void Cross()
+    public string Cross()
     {
         string crossAlg = string.Empty;
         byte corBase = cubinho.cubo[5].values[4];
@@ -171,11 +171,11 @@ public class Solver
             }
             whiteOnTop();
         }
-        Console.WriteLine(crossAlg);
+        return crossAlg;
 
     }
 
-    public void FirstCorners()
+    public string FirstCorners()
     {
         string firstCornersAlg = string.Empty;
         byte corBase = cubinho.cubo[5].values[4];
@@ -362,10 +362,10 @@ public class Solver
 
             }
         }
-        Console.WriteLine(firstCornersAlg);
+        return firstCornersAlg;
     }
 
-    public void CenterEdges()
+    public string CenterEdges()
     {
         string edgesAlg = string.Empty;
         bool edgesCheck()
@@ -400,19 +400,19 @@ public class Solver
                                     cubinho.rotate(4, true);
                                     cubinho.rotate(4, true);
                                     edgesAlg += " U2";
-                                    k = topEdges[(i + 2 == 4 ? 0 : (i + 2 == 5 ? 1 : i + 2))];
+                                    k = topEdges[j];
                                     break;
                                 case 1:
                                 case -3:
                                     cubinho.rotate(4, false);
                                     edgesAlg += " U'";
-                                    k = topEdges[i - 1 == -1 ? 3 : i - 1];
+                                    k = topEdges[j];
                                     break;
                                 case -1:
                                 case 3:
                                     cubinho.rotate(4, true);
                                     edgesAlg += " U";
-                                    k = topEdges[i + 1 == 4 ? 0 : i + 1];
+                                    k = topEdges[j];
                                     break;
                                 case 0:
                                     break;
@@ -433,6 +433,7 @@ public class Solver
                                 cubinho.rotate(4, false);
                                 cubinho.rotate(j, true);
                                 edgesAlg += " U " + faceNome[j + 1 == 4 ? 0 : j + 1] + " U " + faceNome[j + 1 == 4 ? 0 : j + 1] + "' U' " + faceNome[j] + "' U' " + faceNome[j];
+                                break;
                             }
                             else
                             {
@@ -445,6 +446,7 @@ public class Solver
                                 cubinho.rotate(4, true);
                                 cubinho.rotate(j, false);
                                 edgesAlg += " U' " + faceNome[j - 1 == -1 ? 3 : j - 1] + "' U' " + faceNome[j - 1 == -1 ? 3 : j - 1] + " U " + faceNome[j] + " U " + faceNome[j] + "'";
+                                break;
                             }
 
                         }
@@ -471,10 +473,10 @@ public class Solver
                 }
             }
         }
-        Console.WriteLine(edgesAlg);
+        return edgesAlg;
     }
 
-    public void TopCross()
+    public string TopCross()
     {
         string topCrossAlg = string.Empty;
         byte corTopo = cubinho.cubo[4].values[4];
@@ -531,10 +533,10 @@ public class Solver
 
             }
         }
-        Console.WriteLine(topCrossAlg);
+        return topCrossAlg;
     }
 
-    public void TopCorners()
+    public string TopCorners()
     {
         string TopCornersAlg = string.Empty;
         byte corTopo = cubinho.cubo[4].values[4];
@@ -641,7 +643,6 @@ public class Solver
                             }
                             break;
                         default:
-                            Console.WriteLine("DEU OU 3 QUINAS DE TOP OU ENTROU NO IF COM 0");
                             break;
                     }
                     break;
@@ -657,11 +658,11 @@ public class Solver
 
         }
 
-        Console.WriteLine(TopCornersAlg);
+        return TopCornersAlg;
 
     }
 
-    public void PLL1()
+    public string PLL1()
     {
         string PLL1Alg = string.Empty;
         bool isMinerva()
@@ -706,10 +707,10 @@ public class Solver
                 }
             }
         }
-        Console.WriteLine(PLL1Alg);
+        return PLL1Alg;
     }
 
-    public void Minerva()
+    public string Minerva()
     {
         string minervaAlg = string.Empty;
         bool minervaCheck()
@@ -724,7 +725,7 @@ public class Solver
             return true;
         }
 
-        while(!minervaCheck())
+        while (!minervaCheck())
         {
             for (int i = 0; i < 4; i++)
             {
@@ -774,7 +775,7 @@ public class Solver
                         switch (i)
                         {
                             case 1:
-                                cubinho.rotate(4,false);
+                                cubinho.rotate(4, false);
                                 minervaAlg += " U'";
                                 break;
                             case 2:
@@ -794,7 +795,109 @@ public class Solver
             }
 
         }
-        Console.WriteLine(minervaAlg);
+        return minervaAlg;
+    }
+
+    public string algFixer(string alg)
+    {
+        string firstMove = string.Empty;
+        bool first = true;
+        bool second = false;
+        int count = 0;
+        string[] moves = alg.TrimStart().Split(" ");
+        string lastMove = string.Empty;
+        bool changed = false;
+        string newAlg = string.Empty;
+        string anti = "'";
+        string dois = "2";
+        foreach (var move in moves)
+        {
+            count++;
+            if (first && moves.Length != 1)
+            {
+                firstMove = move;
+                first = false;
+                second = true;
+                lastMove = move;
+                continue;
+            }
+            if (moves.Length == 1)
+            {
+                newAlg += move;
+                continue;
+            }
+            if (changed)
+            {
+                newAlg += " " + move;
+                continue;
+            }
+
+            if (move == lastMove)
+            {
+                if (!(move.Contains(dois)))
+                {
+                    newAlg += " " + move.Replace("'", string.Empty) + "2";
+                }
+                lastMove = string.Empty;
+                changed = true;
+            }
+            else if (move.Replace("'", string.Empty).Replace("2", string.Empty) == lastMove.Replace("'", string.Empty).Replace("2", string.Empty))
+            {
+                if (move.Contains(dois))
+                {
+                    switch (lastMove.Contains(anti))
+                    {
+                        case true:
+                            newAlg += " " + lastMove.Replace("'", string.Empty);
+                            break;
+                        case false:
+                            newAlg += " " + lastMove + "'";
+                            break;
+                    }
+
+                }
+                else if (lastMove.Contains(dois))
+                {
+                    switch (move.Contains(anti))
+                    {
+                        case true:
+                            newAlg += " " + move.Replace("'", string.Empty);
+                            break;
+                        case false:
+                            newAlg += " " + move + "'";
+                            break;
+                    }
+                }
+                lastMove = string.Empty;
+                changed = true;
+            }
+            else
+            {
+                if (second)
+                {
+                    second = false;
+                    newAlg += firstMove;
+                    lastMove = move;
+                }
+                else
+                {
+                    newAlg += " " + lastMove;
+                    lastMove = move;
+                    if (count == moves.Length)
+                    {
+                        newAlg += " " + move;
+                    }
+                }
+            }
+        }
+        if (changed)
+        {
+            return(algFixer(newAlg));
+        }
+        else
+        {
+            return newAlg;
+        }
     }
 
 }
