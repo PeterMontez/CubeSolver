@@ -171,7 +171,7 @@ public class Solver
             }
             whiteOnTop();
         }
-        return crossAlg;
+        return algFixer(crossAlg);
 
     }
 
@@ -362,7 +362,7 @@ public class Solver
 
             }
         }
-        return firstCornersAlg;
+        return algFixer(firstCornersAlg);
     }
 
     public string CenterEdges()
@@ -473,7 +473,7 @@ public class Solver
                 }
             }
         }
-        return edgesAlg;
+        return algFixer(edgesAlg);
     }
 
     public string TopCross()
@@ -533,7 +533,7 @@ public class Solver
 
             }
         }
-        return topCrossAlg;
+        return algFixer(topCrossAlg);
     }
 
     public string TopCorners()
@@ -658,7 +658,7 @@ public class Solver
 
         }
 
-        return TopCornersAlg;
+        return algFixer(TopCornersAlg);
 
     }
 
@@ -707,7 +707,7 @@ public class Solver
                 }
             }
         }
-        return PLL1Alg;
+        return algFixer(PLL1Alg);
     }
 
     public string Minerva()
@@ -795,7 +795,7 @@ public class Solver
             }
 
         }
-        return minervaAlg;
+        return algFixer(minervaAlg);
     }
 
     public string algFixer(string alg)
