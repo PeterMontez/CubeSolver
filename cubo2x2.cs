@@ -31,7 +31,7 @@ public class Cubo2x2
                 cubo = new Peca2x2[]{cubo[0], cubo[1], cubo[6], cubo[2], cubo[4], cubo[5], cubo[7], cubo[3]};
                 foreach (var peca in relations[0])
                 {
-                    
+                    cubo[peca].rotate(true);
                 }
                 break;
             case 1:
