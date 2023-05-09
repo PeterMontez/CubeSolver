@@ -3,6 +3,8 @@
 ConsoleKeyInfo cki;
 Cubo cubinho = new Cubo();
 
+Cubo2x2 cubomenor = new Cubo2x2();
+
 byte[] validos = {87, 89, 71, 66, 79, 82};
 
 // for (int i = 0; i < 6; i++)
@@ -40,9 +42,12 @@ byte[] validos = {87, 89, 71, 66, 79, 82};
 //     Console.Write("\n");
 // }
 
-cubinho.translateAlg("R'");
-Solver solucao = new Solver(cubinho);
-Console.WriteLine(solucao.Cross());
+cubomenor.translateAlg("R U R' U' B U R B' R' D2");
+cubomenor.showFace(0);
+
+// cubinho.translateAlg("R'");
+// Solver solucao = new Solver(cubinho);
+// Console.WriteLine(solucao.Cross());
 // Console.WriteLine(solucao.FirstCorners());
 // Console.WriteLine(solucao.CenterEdges());
 // Console.WriteLine(solucao.TopCross());

@@ -25,20 +25,20 @@ public class Cubo2x2
 {
     public Face2x2[] cubo { get; set; } = new Face2x2[6];
     public int[][] relations { get; set; } = new int[6][];
-    public int[] side0 { get; set; } = new int[] { 0, 1, 2 };
-    public int[] side1 { get; set; } = new int[] { 2, 5, 8 };
-    public int[] side2 { get; set; } = new int[] { 6, 7, 8 };
-    public int[] side3 { get; set; } = new int[] { 0, 3, 6 };
+    public int[] side0 { get; set; } = new int[] { 0, 1 };
+    public int[] side1 { get; set; } = new int[] { 1, 3 };
+    public int[] side2 { get; set; } = new int[] { 2, 3 };
+    public int[] side3 { get; set; } = new int[] { 0, 2 };
 
 
     public Cubo2x2()
     {
-        this.cubo[0] = new Face2x2(new byte[]{71,71,71,71,71,71,71,71,71});
-        this.cubo[1] = new Face2x2(new byte[]{82,82,82,82,82,82,82,82,82});
-        this.cubo[2] = new Face2x2(new byte[]{66,66,66,66,66,66,66,66,66});
-        this.cubo[3] = new Face2x2(new byte[]{79,79,79,79,79,79,79,79,79});
-        this.cubo[4] = new Face2x2(new byte[]{87,87,87,87,87,87,87,87,87});
-        this.cubo[5] = new Face2x2(new byte[]{89,89,89,89,89,89,89,89,89});
+        this.cubo[0] = new Face2x2(new byte[]{71,71,71,71});
+        this.cubo[1] = new Face2x2(new byte[]{82,82,82,82});
+        this.cubo[2] = new Face2x2(new byte[]{66,66,66,66});
+        this.cubo[3] = new Face2x2(new byte[]{79,79,79,79});
+        this.cubo[4] = new Face2x2(new byte[]{87,87,87,87});
+        this.cubo[5] = new Face2x2(new byte[]{89,89,89,89});
         relations[0] = new int[4] { 4, 1, 5, 3 };
         relations[1] = new int[4] { 4, 2, 5, 0 };
         relations[2] = new int[4] { 4, 3, 5, 1 };
@@ -54,7 +54,7 @@ public class Cubo2x2
 
     public void rotate(int face, bool dir)
     {
-        int[] tempFace = new int[3];
+        int[] tempFace = new int[2];
         int rotAmount = dir == true ? 1 : 3;
         for (int j = 0; j < rotAmount; j++)
         {
@@ -62,47 +62,47 @@ public class Cubo2x2
             switch (face)
             {
                 case 0:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         tempFace[i] = cubo[relations[face][0]].values[side2[i]];
-                        cubo[relations[face][0]].values[side2[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i - 2)]];
-                        cubo[relations[face][3]].values[side1[Math.Abs(i - 2)]] = cubo[relations[face][2]].values[side0[Math.Abs(i - 2)]];
-                        cubo[relations[face][2]].values[side0[Math.Abs(i - 2)]] = cubo[relations[face][1]].values[side3[i]];
+                        cubo[relations[face][0]].values[side2[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i - 1)]];
+                        cubo[relations[face][3]].values[side1[Math.Abs(i - 1)]] = cubo[relations[face][2]].values[side0[Math.Abs(i - 1)]];
+                        cubo[relations[face][2]].values[side0[Math.Abs(i - 1)]] = cubo[relations[face][1]].values[side3[i]];
                         cubo[relations[face][1]].values[side3[i]] = (byte)tempFace[i];
                     }
                     break;
                 case 1:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         tempFace[i] = cubo[relations[face][0]].values[side1[i]];
                         cubo[relations[face][0]].values[side1[i]] = cubo[relations[face][3]].values[side1[i]];
                         cubo[relations[face][3]].values[side1[i]] = cubo[relations[face][2]].values[side1[i]];
-                        cubo[relations[face][2]].values[side1[i]] = cubo[relations[face][1]].values[side3[Math.Abs(i - 2)]];
-                        cubo[relations[face][1]].values[side3[Math.Abs(i - 2)]] = (byte)tempFace[i];
+                        cubo[relations[face][2]].values[side1[i]] = cubo[relations[face][1]].values[side3[Math.Abs(i - 1)]];
+                        cubo[relations[face][1]].values[side3[Math.Abs(i - 1)]] = (byte)tempFace[i];
                     }
                     break;
                 case 2:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         tempFace[i] = cubo[relations[face][0]].values[side0[i]];
                         cubo[relations[face][0]].values[side0[i]] = cubo[relations[face][3]].values[side1[i]];
-                        cubo[relations[face][3]].values[side1[i]] = cubo[relations[face][2]].values[side2[Math.Abs(i - 2)]];
-                        cubo[relations[face][2]].values[side2[Math.Abs(i - 2)]] = cubo[relations[face][1]].values[side3[Math.Abs(i - 2)]];
-                        cubo[relations[face][1]].values[side3[Math.Abs(i - 2)]] = (byte)tempFace[i];
+                        cubo[relations[face][3]].values[side1[i]] = cubo[relations[face][2]].values[side2[Math.Abs(i - 1)]];
+                        cubo[relations[face][2]].values[side2[Math.Abs(i - 1)]] = cubo[relations[face][1]].values[side3[Math.Abs(i - 1)]];
+                        cubo[relations[face][1]].values[side3[Math.Abs(i - 1)]] = (byte)tempFace[i];
                     }
                     break;
                 case 3:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         tempFace[i] = cubo[relations[face][0]].values[side3[i]];
-                        cubo[relations[face][0]].values[side3[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i - 2)]];
-                        cubo[relations[face][3]].values[side1[Math.Abs(i - 2)]] = cubo[relations[face][2]].values[side3[i]];
+                        cubo[relations[face][0]].values[side3[i]] = cubo[relations[face][3]].values[side1[Math.Abs(i - 1)]];
+                        cubo[relations[face][3]].values[side1[Math.Abs(i - 1)]] = cubo[relations[face][2]].values[side3[i]];
                         cubo[relations[face][2]].values[side3[i]] = cubo[relations[face][1]].values[side3[i]];
                         cubo[relations[face][1]].values[side3[i]] = (byte)tempFace[i];
                     }
                     break;
                 case 4:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         tempFace[i] = cubo[relations[face][0]].values[side0[i]];
                         cubo[relations[face][0]].values[side0[i]] = cubo[relations[face][3]].values[side0[i]];
@@ -112,7 +112,7 @@ public class Cubo2x2
                     }
                     break;
                 case 5:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         tempFace[i] = cubo[relations[face][0]].values[side2[i]];
                         cubo[relations[face][0]].values[side2[i]] = cubo[relations[face][3]].values[side2[i]];
@@ -206,7 +206,7 @@ public class Cubo2x2
 
     public void showFace(int face)
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (cubo[face].values[i] == 87)
                 Console.BackgroundColor = ConsoleColor.White;
@@ -221,7 +221,7 @@ public class Cubo2x2
             if (cubo[face].values[i] == 82)
                 Console.BackgroundColor = ConsoleColor.Red;
             Console.Write("|-|");
-            if ((i + 1) % 3 == 0)
+            if ((i + 1) % 2 == 0)
             {
                 Console.ResetColor();
                 Console.Write("\n");
