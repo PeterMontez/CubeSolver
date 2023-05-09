@@ -17,6 +17,7 @@ public class Face2x2
     {
         byte[] newFace = new byte[4] { values[1], values[3], values[0], values[2] };
         newFace.CopyTo(values, 0);
+		//teste
     }
 }
 
