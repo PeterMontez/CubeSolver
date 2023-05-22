@@ -42,8 +42,10 @@ byte[] validos = {87, 89, 71, 66, 79, 82};
 //     Console.Write("\n");
 // }
 
-cubomenor.translateAlg("R U R' U' B U R B' R' D2");
+cubomenor.translateAlg("R U R' U' R U2 R' U");
 cubomenor.showFace(0);
+Solver2x2 solvemenor = new Solver2x2(cubomenor);
+Console.WriteLine(solvemenor.BottomLayer());
 
 // cubinho.translateAlg("R'");
 // Solver solucao = new Solver(cubinho);

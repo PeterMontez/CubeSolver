@@ -8,15 +8,16 @@ public class Solver2x2
         cubinho = cubo;
     }
 
-    public void BottomLayer()
+    public string BottomLayer()
     {
-        int corBase = cubinho.cubo[0].values[0];
+        int corBase = cubinho.cubo[5].values[0];
         int crr = 0;
+        string bottomAlg = string.Empty;
         bool bottomCheck()
         {
             for (int i = 0; i < 4; i++)
             {
-                if (cubinho.cubo[0].values[i] != corBase || cubinho.cubo[i].values[2] != cubinho.cubo[i].values[3])
+                if (cubinho.cubo[5].values[i] != corBase || cubinho.cubo[i].values[2] != cubinho.cubo[i].values[3])
                     return false;
             }
             return true;
@@ -39,14 +40,37 @@ public class Solver2x2
                 {
                     switch (k - crr)
                     {
-                        case 0:
+                        case 3: case -1:
+                            cubinho.rotate(4, true);
+                            cubinho.rotate(4, true);
+                            bottomAlg += " U2";
+                            break;
+                        case 2: case -2:
+                            cubinho.rotate(4, true);
+                            bottomAlg += " U";
+                            break;
+                        case 1: case -3:
+                            cubinho.rotate(4, false);
+                            bottomAlg += " U'";
                             break;
                         default:
                             break;
                     }
+
+                    cubinho.rotate(crr + 1 == 4 ? 0 : crr + 1, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(crr + 1 == 4 ? 0 : crr + 1, false);
+                    cubinho.rotate(4, false);
+                    cubinho.rotate(crr + 1 == 4 ? 0 : crr + 1, true);
+                    cubinho.rotate(4, true);
+                    cubinho.rotate(crr + 1 == 4 ? 0 : crr + 1, false);
+                    bottomAlg += " " + faceNome[crr + 1 == 4 ? 0 : crr + 1] + " U2 " + faceNome[crr + 1 == 4 ? 0 : crr + 1] + "' U' " + faceNome[crr + 1 == 4 ? 0 : crr + 1] + " U " + faceNome[crr + 1 == 4 ? 0 : crr + 1] + "'";
                 }
             }
+            System.Console.WriteLine(bottomAlg);
         }
+        return bottomAlg;
 
     }
 
